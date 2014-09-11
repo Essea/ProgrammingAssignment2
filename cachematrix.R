@@ -1,15 +1,37 @@
-## Put comments here that give an overall description of what your
-## functions do
+## Hello! Let me introduce my code.
 
-## Write a short comment describing this function
+## The first function below creates a "matrix" object according to the initial matrix "x" and 
+## let you store the initial and inverse matrices and print them if you desire.
 
 makeCacheMatrix <- function(x = matrix()) {
-
+    inverse <<- NULL              ## a variable that refers to the neccessary inverse matrix
+        
+    getmatrix <- function() x     ## function printing the initial matrix X
+    setinverse <- function(inv){  ## function which set a value of "inverse" varivale
+        inverse <<- inv
+    }
+    getinverse <- function() inverse ## function printing the output inverse matrix
+    
+    list(setinverse = setinverse, getinverse = getinverse, ## "matrix" object, consisting of several functions
+         getmatrix = getmatrix)
 }
 
 
-## Write a short comment describing this function
+## The second function "cacheSolve" can check existence of inverse matrix and
+## in case of NULL-meaning calculate this one and print out. 
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function(x) {
+        
+    inverse <- x$getinverse()
+    if (!is.null(inverse)){
+        message ("You've already calculated the inverse matrix. See it again:")
+        return (inverse)
+    }
+    matrix <- x$getmatrix()
+    inverse <- solve(matrix)
+    x$setinverse(inverse)
+    
+    inverse
 }
+
+## Thanks for your examination. And have a nice day :)
